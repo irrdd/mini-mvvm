@@ -14,45 +14,41 @@ module.exports = {
     rules: [
       // 兼容es5
       {
-        test: /\.js$/i,
+        test: /\.ts$/i,
         exclude: /(node_modules|bower_components)/,
         use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              ['@babel/preset-env',
-              {
-                useBuiltIns:'usage',
-                corejs:{
-                  version:3
-                },
-                targets:{
-                  chrome:'60',
-                  firefox:'60',
-                  ie:"11",
-                  safari:'10',
-                  edge:'17'
-                }
-              }
-            ]
-            ],
-          }
-        },
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                ['@babel/preset-env',
+                  {
+                    useBuiltIns: 'usage',
+                    corejs: {
+                      version: 3
+                    },
+                    targets: {
+                      chrome: '60',
+                      firefox: '60',
+                      ie: "11",
+                      safari: '10',
+                      edge: '17'
+                    }
+                  }
+                ]
+              ],
+            }
+          },
+          "ts-loader"
+
         ]
       },
-   
-     
+
+
     ]
   },
   plugins: [
     new htmlWebpackPlugin({
       template: './index.html',
-      minify: {
-        collapseWhitespace: true,
-        removeAttributeQuotes: true,
-        removeComments: true
-      },
-      isBrowser: false,
     }), //创建index.html文件
   ],
   resolve: {
