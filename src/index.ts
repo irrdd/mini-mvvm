@@ -1,12 +1,17 @@
-import { Options } from './interface';
+import { Options } from './Interfaces/mvvm';
+import Compile from './compile';
+import Observer from './observer';
+import Watcher from './watcher';
+
 class MVVM {
     [x: string]: any;
 
-    $options: Object
-    $data?: Object
-    $method?: Object
-    $computed?: Object
-    $watch?: Object
+    private $options: Options
+    private $data?: Object
+    private $method?: Object
+    private $computed?: Object
+    private $watch?: Object
+    private $compile?: Object
 
     constructor(options: Options) {
         this.$options = options
@@ -14,34 +19,43 @@ class MVVM {
         this.$method = options.method
         this.$computed = options.computed
         this.$watch = options.watch
-        let self = this;
+        this.init()
+
+    }
+    /**
+ * @todo 初始化
+ * @return {null}
+*/
+    init(): void {
         // 数据代理
-        Object.keys(this.$data).forEach(key => {
-            self.proxyData(key)
-        })
+        this.proxyData()
         // 处理计算属性
         this.initComputed()
+
+        this.$compile = new Compile(this.$options.el, this)
     }
     /**
      * @todo 实现数据代理，将this.$data中的数据代理到this上
-     * @param {String} key 传入的键
+     * @param {string} key 传入的键
      * @return {null}
     */
-    proxyData(key: string): void {
+    proxyData(): void {
         let self = this;
-        Object.defineProperty(self, key, {
-            configurable: false,
-            enumerable: true,
-            get: function proxyGetter(): unknown {
-                // console.log('得到值');
+        Object.keys(this.$data).forEach(key => {
+            Object.defineProperty(self, key, {
+                configurable: false,
+                enumerable: true,
+                get: function proxyGetter(): unknown {
+                    // console.log('得到值');
 
-                return self.$data[key];
-            },
-            set: function proxySetter(newValue: unknown): void {
-                // console.log('改变值');
+                    return self.$data[key];
+                },
+                set: function proxySetter(newValue: unknown): void {
+                    // console.log('改变值');
 
-                self.$data[key] = newValue;
-            }
+                    self.$data[key] = newValue;
+                }
+            })
         })
     }
     /**
@@ -60,6 +74,25 @@ class MVVM {
             })
         }
     }
+    get compile() {
+        return this.$compile
+    }
+    get data() {
+        return this.$data
+    }
+    get method() {
+        return this.$method
+    }
+    get computed() {
+        return this.$computed
+    }
+    get watch() {
+        return this.$watch
+    }
+    get options() {
+        return this.$options
+    }
+
 
 }
 
