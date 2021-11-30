@@ -2,7 +2,7 @@ interface Options {
     el:string,
     data?:Object,
     method?:Object,
-    compute?:Object,
+    computed?:Object,
     watch?:Object
 }
 

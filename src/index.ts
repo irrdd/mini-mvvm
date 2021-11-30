@@ -5,20 +5,22 @@ class MVVM {
     $options: Object
     $data?: Object
     $method?: Object
-    $compute?: Object
+    $computed?: Object
     $watch?: Object
 
     constructor(options: Options) {
         this.$options = options
         this.$data = options.data
         this.$method = options.method
-        this.$compute = options.compute
+        this.$computed = options.computed
         this.$watch = options.watch
         let self = this;
+        // 数据代理
         Object.keys(this.$data).forEach(key => {
             self.proxyData(key)
         })
-
+        // 处理计算属性
+        this.initComputed()
     }
     /**
      * @todo 实现数据代理，将this.$data中的数据代理到this上
@@ -47,7 +49,16 @@ class MVVM {
   * @return {null}
  */
     initComputed(): void {
-
+        let self = this;
+        let computed = this.$computed;
+        if (typeof computed === 'object') {
+            Object.keys(computed).forEach(key => {
+                Object.defineProperty(self, key, {
+                    get: typeof computed[key] === 'function' ? computed[key] : computed[key].get,
+                    set: typeof computed[key] === 'function' ? () => { } : computed[key].set
+                });
+            })
+        }
     }
 
 }
