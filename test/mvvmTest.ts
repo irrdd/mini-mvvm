@@ -1,10 +1,16 @@
 import MVVM from "../src";
-import {Options} from '../src/interface';
+import {Options} from '../src/Interfaces/mvvm';
 
 let options:Options = {
-    el:'app',
+    el:'#app',
     data: {
-        name: '测试'
+        name: '测试',
+        person:{
+            name: 'John',
+            age: '34',
+            sex: 'male'
+        }
+
     },
     computed:{
         one(){
@@ -24,11 +30,11 @@ let options:Options = {
 }
 let mvvm = new MVVM(options);
 
-// console.log(mvvm);
-// console.log(mvvm.one);
-console.log(mvvm.two);
-mvvm.two = '自定义set'
-console.log(mvvm.two);
+console.log(mvvm.compile);
+console.log(mvvm);
+
+
+
 
 
 
