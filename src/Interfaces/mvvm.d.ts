@@ -6,8 +6,6 @@ interface Options {
     watch?:Object
 }
 
-
-
 export {
     Options
 }
