@@ -17,15 +17,30 @@ class Compile {
 
     }
     init(): void {
-
+        this.compileElement( this.$fragment )
     }
     /**
 * @todo 对文档碎片进行操作
-* @param {Element} node 
+* @param {DocumentFragment | Element} node 
 * @return {null} 
 */
-    compileElement(node: Element): void {
-
+    compileElement(fragment: DocumentFragment | Element): void {
+        let childNodes = fragment.childNodes
+        let self = this
+        Array.from(childNodes).forEach((node: Element)=> {
+            let text = node.textContent
+            var regex = /\{\{(.*)\}\}/
+            if (compileUtil.isElementNode(node)) {
+                console.log('匹配元素节点成功');
+                
+            }else if (compileUtil.isTextNode(node) && regex.test(text)) {
+                console.log('匹配文本节点成功');
+                
+            }
+            if (node.childNodes && node.childNodes.length) {
+                self.compileElement(node)
+            }
+        })
     }
     /**
  * @todo 创建文档碎片，将元素节点依次放入文档碎片后返回
@@ -38,7 +53,7 @@ class Compile {
         while (child = element.firstChild) {
             fragment.appendChild(child)
         }
-        return fragment
+        return fragment 
 
     }
 }
