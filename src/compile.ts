@@ -1,4 +1,9 @@
-import * as compileUtil from './utils/compileUtil'
+import  VerdictUtil from './utils/verdictUtil'
+import  UpdateUtil from './utils/updateUtil'
+import  CompileUtil from './utils/compileUtil'
+let verdictUtil = new VerdictUtil
+let updateUtil = new UpdateUtil
+let compileUtil = new CompileUtil
 class Compile {
     private $vm?: Object
     private $element: Element
@@ -11,13 +16,9 @@ class Compile {
             this.init()
             this.$element.appendChild(this.$fragment)
         }
-
-
-
-
     }
     init(): void {
-        this.compileElement( this.$fragment )
+        this.compileElement(this.$fragment)
     }
     /**
 * @todo 对文档碎片进行操作
@@ -27,15 +28,15 @@ class Compile {
     compileElement(fragment: DocumentFragment | Element): void {
         let childNodes = fragment.childNodes
         let self = this
-        Array.from(childNodes).forEach((node: Element)=> {
+        Array.from(childNodes).forEach((node: Element) => {
             let text = node.textContent
             var regex = /\{\{(.*)\}\}/
-            if (compileUtil.isElementNode(node)) {
+            if (verdictUtil.isElementNode(node)) {
                 console.log('匹配元素节点成功');
-                
-            }else if (compileUtil.isTextNode(node) && regex.test(text)) {
+
+            } else if (verdictUtil.isTextNode(node) && regex.test(text)) {
                 console.log('匹配文本节点成功');
-                
+
             }
             if (node.childNodes && node.childNodes.length) {
                 self.compileElement(node)
@@ -53,7 +54,7 @@ class Compile {
         while (child = element.firstChild) {
             fragment.appendChild(child)
         }
-        return fragment 
+        return fragment
 
     }
 }
