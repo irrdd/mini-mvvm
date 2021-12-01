@@ -1,17 +1,17 @@
-import { Options } from './Interfaces/mvvm';
+import { Options } from './Interfaces/dataType';
 import Compile from './compile';
 import Observer from './observer';
 import Watcher from './watcher';
+import { mvvm } from './Interfaces/objectType';
 
-class MVVM {
+class MVVM implements mvvm {
     [x: string]: any;
-
-    private $options: Options
-    private $data?: Object
-    private $method?: Object
-    private $computed?: Object
-    private $watch?: Object
-    private $compile?: Object
+     $options: Options
+     $data: Object
+     $method: Object
+     $computed: Object
+     $watch: Object
+     $compile: Object
 
     constructor(options: Options) {
         this.$options = options
@@ -31,7 +31,7 @@ class MVVM {
         this.proxyData()
         // 处理计算属性
         this.initComputed()
-
+        // 渲染页面
         this.$compile = new Compile(this.$options.el, this)
     }
     /**

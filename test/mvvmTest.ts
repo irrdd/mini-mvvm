@@ -1,5 +1,5 @@
 import MVVM from "../src";
-import {Options} from '../src/Interfaces/mvvm';
+import {Options} from '../src/Interfaces/dataType';
 
 let options:Options = {
     el:'#app',
@@ -30,8 +30,8 @@ let options:Options = {
 }
 let mvvm = new MVVM(options);
 
-console.log(mvvm.compile);
-console.log(mvvm);
+console.log(mvvm.data);
+// console.log(mvvm);
 
 
 

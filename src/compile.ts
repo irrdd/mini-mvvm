@@ -1,14 +1,15 @@
 import  VerdictUtil from './utils/verdictUtil'
-import  UpdateUtil from './utils/updateUtil'
+import  UpdaterUtil from './utils/updaterUtil'
+import { mvvm } from './Interfaces/objectType';
 import  CompileUtil from './utils/compileUtil'
 let verdictUtil = new VerdictUtil
-let updateUtil = new UpdateUtil
+let updaterUtil = new UpdaterUtil
 let compileUtil = new CompileUtil
 class Compile {
-    private $vm?: Object
+    private $vm?: mvvm
     private $element: Element
     private $fragment: DocumentFragment
-    constructor(el: string, vm: Object) {
+    constructor(el: string, vm: mvvm) {
         this.$vm = vm;
         this.$element = document.querySelector(el)
         if (this.$element) {
@@ -36,6 +37,7 @@ class Compile {
 
             } else if (verdictUtil.isTextNode(node) && regex.test(text)) {
                 console.log('匹配文本节点成功');
+                compileUtil.text(node,this.$vm,RegExp.$1.trim())
 
             }
             if (node.childNodes && node.childNodes.length) {
