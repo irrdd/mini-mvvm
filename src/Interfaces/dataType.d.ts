@@ -1,7 +1,7 @@
 interface Options {
     el: string,
     data?: Object,
-    method?: Object,
+    methods?: Object,
     computed?: Object,
     watch?: Object
 }

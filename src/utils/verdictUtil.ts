@@ -27,6 +27,15 @@ class VerdictUtil {
         let regex = /^v-.+$/
         return regex.test(attrName)
     }
+    /**
+* @todo 判断是否是v-开头的描述符
+* @param {string} attrName 
+* @return {boolean}
+*/
+    isEventDirective(attrName: string): boolean {
+        let regex = /^on.+$/
+        return regex.test(attrName)
+    }
 }
 
 

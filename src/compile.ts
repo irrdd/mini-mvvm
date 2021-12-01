@@ -1,7 +1,7 @@
-import  VerdictUtil from './utils/verdictUtil'
-import  UpdaterUtil from './utils/updaterUtil'
+import VerdictUtil from './utils/verdictUtil'
+import UpdaterUtil from './utils/updaterUtil'
 import { mvvm } from './Interfaces/objectType';
-import  CompileUtil from './utils/compileUtil'
+import CompileUtil from './utils/compileUtil'
 let verdictUtil = new VerdictUtil
 let updaterUtil = new UpdaterUtil
 let compileUtil = new CompileUtil
@@ -33,13 +33,39 @@ class Compile {
             let text = node.textContent
             let regex = /\{\{(.*)\}\}/
             if (verdictUtil.isElementNode(node)) {
-                compileUtil.compileEle(node,this.$vm)
+                this.compile(node, this.$vm)
             } else if (verdictUtil.isTextNode(node) && regex.test(text)) {
-                compileUtil.text(node,this.$vm,RegExp.$1.trim())
+                compileUtil.text(node, this.$vm, RegExp.$1.trim())
 
             }
             if (node.childNodes && node.childNodes.length) {
                 self.compileElement(node)
+            }
+        })
+    }
+
+    /**
+* @todo 渲染元素节点
+* @param {Element} node 
+* @param {mvvm} vm 
+* @return {null}
+*/
+    compile(node: Element, vm: mvvm): void {
+        let nodeAttrs = node.attributes
+        Array.from(nodeAttrs).forEach((attr) => {
+            let attrName = attr.name
+            if (verdictUtil.isDirective(attrName)) {
+                let express = attr.value
+                let regex = /^v-(.+)$/
+                regex.test(attrName)
+                let dir = RegExp.$1.trim()
+                if (verdictUtil.isEventDirective(dir)) {
+                    compileUtil.eventHandler(node, vm, express, dir)
+                } else {
+                    compileUtil[dir] && compileUtil[dir](node, vm, express)
+                }
+
+
             }
         })
     }

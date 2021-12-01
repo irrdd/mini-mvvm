@@ -8,7 +8,7 @@ class MVVM implements mvvm {
     [x: string]: any;
      $options: Options
      $data?: Object
-     $method?: Object
+     $methods?: Object
      $computed?: Object
      $watch?: Object
      $compile: Object
@@ -17,7 +17,7 @@ class MVVM implements mvvm {
     constructor(options: Options) {
         this.$options = options
         this.$data = options.data
-        this.$method = options.method
+        this.$methods = options.methods
         this.$computed = options.computed
         this.$watch = options.watch
         this.init()
@@ -81,8 +81,8 @@ class MVVM implements mvvm {
     get data() {
         return this.$data
     }
-    get method() {
-        return this.$method
+    get methods() {
+        return this.$methods
     }
     get computed() {
         return this.$computed

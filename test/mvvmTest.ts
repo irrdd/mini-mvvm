@@ -1,31 +1,37 @@
 import MVVM from "../src";
-import {Options} from '../src/Interfaces/dataType';
+import { Options } from '../src/Interfaces/dataType';
 
-let options:Options = {
-    el:'#app',
+let options: Options = {
+    el: '#app',
     data: {
         name: '测试',
-        person:{
+        person: {
             name: 'John',
             age: '34',
             sex: 'male'
         },
-        html:'<span>John</span>'
+        html: '<span>John</span>'
 
     },
-    computed:{
-        one(){
+    computed: {
+        one() {
             return '返回计算属性'
         },
-        two:{
-            get():String{
+        two: {
+            get(): String {
                 return '自定义get'
-               
+
             },
-            set(newValue: unknown){
+            set(newValue: unknown) {
                 console.log(newValue);
-                
+
             }
+        }
+    },
+    methods: {
+        test() {
+            console.log('事件绑定');
+
         }
     }
 }

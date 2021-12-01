@@ -4,7 +4,7 @@ interface mvvm {
     [x: string]: any;
     $options: Options
     $data?: Object
-    $method?: Object
+    $methods?: Object
     $computed?: Object
     $watch?: Object
     $compile: Object
