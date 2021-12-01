@@ -9,7 +9,8 @@ let options:Options = {
             name: 'John',
             age: '34',
             sex: 'male'
-        }
+        },
+        html:'<span>John</span>'
 
     },
     computed:{
@@ -30,7 +31,7 @@ let options:Options = {
 }
 let mvvm = new MVVM(options);
 
-console.log(mvvm.data);
+console.log(mvvm.one);
 // console.log(mvvm);
 
 

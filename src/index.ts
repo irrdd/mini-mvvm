@@ -7,11 +7,12 @@ import { mvvm } from './Interfaces/objectType';
 class MVVM implements mvvm {
     [x: string]: any;
      $options: Options
-     $data: Object
-     $method: Object
-     $computed: Object
-     $watch: Object
+     $data?: Object
+     $method?: Object
+     $computed?: Object
+     $watch?: Object
      $compile: Object
+     $template?: string
 
     constructor(options: Options) {
         this.$options = options

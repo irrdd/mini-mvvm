@@ -6,7 +6,7 @@ let verdictUtil = new VerdictUtil
 let updaterUtil = new UpdaterUtil
 let compileUtil = new CompileUtil
 class Compile {
-    private $vm?: mvvm
+    private $vm: mvvm
     private $element: Element
     private $fragment: DocumentFragment
     constructor(el: string, vm: mvvm) {
@@ -31,12 +31,10 @@ class Compile {
         let self = this
         Array.from(childNodes).forEach((node: Element) => {
             let text = node.textContent
-            var regex = /\{\{(.*)\}\}/
+            let regex = /\{\{(.*)\}\}/
             if (verdictUtil.isElementNode(node)) {
-                console.log('匹配元素节点成功');
-
+                compileUtil.compileEle(node,this.$vm)
             } else if (verdictUtil.isTextNode(node) && regex.test(text)) {
-                console.log('匹配文本节点成功');
                 compileUtil.text(node,this.$vm,RegExp.$1.trim())
 
             }
