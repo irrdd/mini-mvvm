@@ -9,7 +9,7 @@
 <body>
     <div id="app">
         <h1 @click="test" >mine-mvvm
-            <span v-html='html'></span>
+            <span v-bind:data='html'></span>
         </h1>
         {{person.sex}}
     </div>

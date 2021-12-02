@@ -51,10 +51,12 @@ class CompileUtil {
 * @return {null}
 */
     eventHandler(node: Element, vm: mvvm, express: string, dir: string): void {
+        let eventName = dir.split(':')[0];
         let eventType = dir.split(':')[1];
-        let fn = vm.$methods && vm.$methods[express]
-        if (eventType && fn) {
-            node.addEventListener(eventType, fn)
+        if (eventName === 'on') {
+            this.eventOnHandler(node, vm, express, eventType)
+        } else {
+            this.eventBindHandler(node, vm, express, eventType)
         }
     }
     /**
@@ -65,23 +67,38 @@ class CompileUtil {
 * @param {dir} express 
 * @return {null}
 */
-    eventHandlerSugar(node: Element, vm: mvvm, express: string, dir: string): void {
+    eventHandlerSugar(node: Element, vm: mvvm, express: string, eventType: string, eventName: string): void {
+        if (eventName === '@') {
+            this.eventOnHandler(node, vm, express, eventType)
+        } else {
+            this.eventBindHandler(node, vm, express, eventType)
+        }
+
+    }
+    /**
+* @todo 处理v-on的事件指令
+* @param {Element} node 
+* @param {mvvm} vm 
+* @param {string} express 
+* @param {dir} dir  
+* @return {null}
+*/
+    eventOnHandler(node: Element, vm: mvvm, express: string, dir: string): void {
         let fn = vm.$methods && vm.$methods[express]
         if (dir && fn) {
             node.addEventListener(dir, fn)
         }
     }
     /**
-* @todo 处理语法糖的普通指令
+* @todo 处理v-bind的事件指令
 * @param {Element} node 
 * @param {mvvm} vm 
 * @param {string} express 
-* @param {dir} express 
+* @param {dir} dir 
 * @return {null}
 */
-    bindHandlerSugar(node: Element, vm: mvvm, express: string, dir: string): void {
-        console.log('处理普通指令的语法糖');
-        
+    eventBindHandler(node: Element, vm: mvvm, express: string, dir: string): void {
+        console.log('处理v-bind');
     }
     /**
 * @todo 获取mvvm中data的属性值

@@ -28,12 +28,12 @@ class VerdictUtil {
         return regex.test(attrName)
     }
     /**
-* @todo 判断是否是v-开头的描述符
+* @todo 判断是否是事件指令
 * @param {string} dir 
 * @return {boolean}
 */
     isEventDirective(dir: string): boolean {
-        let regex = /^on.+$/
+        let regex = /^(on|bind).+$/
         return regex.test(dir)
     }
     /**
@@ -45,24 +45,6 @@ class VerdictUtil {
         let regex = /^(@|:).+$/
         return regex.test(attrName)
     }
-    /**
-* @todo 判断是否是事件指令的语法糖
-* @param {string} attrName 
-* @return {boolean}
-*/
-    isEventSugar(dir: string): boolean {
-        let regex = /^@|.+$/
-        return regex.test(dir)
-    }
-        /**
-* @todo 判断是否是普通指令的语法糖
-* @param {string} attrName 
-* @return {boolean}
-*/
-isBindSugar(dir: string): boolean {
-    let regex = /^:|.+$/
-    return regex.test(dir)
-}
 }
 
 

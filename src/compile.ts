@@ -70,14 +70,9 @@ class Compile {
                 let express = attr.value
                 let regex = /^(@|:)(.+)$/
                 regex.test(attrName)
-                let dir = RegExp.$2.trim()
-                if (verdictUtil.isEventSugar(attrName)) {
-                    compileUtil.eventHandlerSugar(node, vm, express, dir)
-                } else if(verdictUtil.isBindSugar(attrName)) {
-                    compileUtil.bindHandlerSugar(node, vm, express, dir)
-
-
-                }
+                let eventType = RegExp.$2.trim()
+                let eventName = RegExp.$1.trim()
+                compileUtil.eventHandlerSugar(node, vm, express, eventType, eventName)
             }
             node.removeAttribute(attrName)
         })
