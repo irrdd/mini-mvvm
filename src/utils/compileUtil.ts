@@ -1,6 +1,7 @@
 import { mvvm } from '../Interfaces/objectType';
 import UpdaterUtil from './updaterUtil'
 import VerdictUtil from './verdictUtil'
+import Watcher from '../watcher'
 let updaterUtil = new UpdaterUtil
 let verdictUtil = new VerdictUtil
 
@@ -19,6 +20,9 @@ class CompileUtil {
     bind(node: Element, vm: mvvm, express: string, dir: string): void {
         let updateFn = updaterUtil[dir + 'Updater']
         updateFn && updateFn(node, this.getVMVal(vm, express))
+        new Watcher(vm, express,(value,oldValue) => {
+            updateFn && updateFn(node, value, oldValue)
+        })
     }
 
     /**
@@ -47,7 +51,7 @@ class CompileUtil {
 * @param {Element} node 
 * @param {mvvm} vm 
 * @param {string} express 
-* @param {dir} express 
+* @param {string} dir 元素处理后属性
 * @return {null}
 */
     eventHandler(node: Element, vm: mvvm, express: string, dir: string): void {
@@ -64,7 +68,7 @@ class CompileUtil {
 * @param {Element} node 
 * @param {mvvm} vm 
 * @param {string} express 
-* @param {dir} express 
+* @param {string} dir 元素处理后属性
 * @return {null}
 */
     eventHandlerSugar(node: Element, vm: mvvm, express: string, eventType: string, eventName: string): void {
@@ -79,7 +83,7 @@ class CompileUtil {
 * @param {Element} node 
 * @param {mvvm} vm 
 * @param {string} express 
-* @param {dir} dir  
+* @param {string} dir  
 * @return {null}
 */
     eventOnHandler(node: Element, vm: mvvm, express: string, dir: string): void {
@@ -93,7 +97,7 @@ class CompileUtil {
 * @param {Element} node 
 * @param {mvvm} vm 
 * @param {string} express 
-* @param {dir} dir 
+* @param {string} dir 
 * @return {null}
 */
     eventBindHandler(node: Element, vm: mvvm, express: string, dir: string): void {

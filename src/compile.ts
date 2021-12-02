@@ -1,14 +1,20 @@
 import VerdictUtil from './utils/verdictUtil'
 import UpdaterUtil from './utils/updaterUtil'
-import { mvvm } from './Interfaces/objectType';
+import { mvvm, compile } from './Interfaces/objectType';
 import CompileUtil from './utils/compileUtil'
 let verdictUtil = new VerdictUtil
 let updaterUtil = new UpdaterUtil
 let compileUtil = new CompileUtil
-class Compile {
-    private $vm: mvvm
-    private $element: Element
-    private $fragment: DocumentFragment
+/**
+* @todo 渲染模板类
+* @param { string } el 
+* @param {mvvm} vm mvvm实例
+
+*/
+class Compile implements compile {
+    $vm: mvvm
+    $element: Element
+    $fragment: DocumentFragment
     constructor(el: string, vm: mvvm) {
         this.$vm = vm;
         this.$element = document.querySelector(el)
@@ -23,8 +29,8 @@ class Compile {
     }
     /**
 * @todo 对文档碎片进行操作
-* @param {DocumentFragment | Element} node 
-* @return {null} 
+* @param {DocumentFragment | Element} node 元素节点
+
 */
     compileElement(fragment: DocumentFragment | Element): void {
         let childNodes = fragment.childNodes
@@ -46,8 +52,8 @@ class Compile {
 
     /**
 * @todo 渲染元素节点
-* @param {Element} node 
-* @param {mvvm} vm 
+* @param {Element} node 元素节点
+* @param {mvvm} vm mvvm实例
 * @return {null}
 */
     compile(node: Element, vm: mvvm): void {
@@ -79,7 +85,7 @@ class Compile {
     }
     /**
  * @todo 创建文档碎片，将元素节点依次放入文档碎片后返回
- * @param {Element} element 
+ * @param {Element} element 元素节点
  * @return {DocumentFragment} fragment 文档碎片
 */
     node2Fragment(element: Element): DocumentFragment {

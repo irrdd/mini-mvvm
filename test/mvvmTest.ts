@@ -10,7 +10,9 @@ let options: Options = {
             age: '34',
             sex: 'male'
         },
-        html: '<span>John</span>'
+        html: '<span>John</span>',
+        class:'one',
+        boolean: true
 
     },
     computed: {
@@ -40,7 +42,7 @@ let options: Options = {
     }
 }
 let mvvm = new MVVM(options);
-
+mvvm.name = '加入观察者后'
 console.log(mvvm.one);
 // console.log(mvvm);
 

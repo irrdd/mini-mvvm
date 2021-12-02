@@ -6,13 +6,13 @@ import { mvvm } from './Interfaces/objectType';
 
 class MVVM implements mvvm {
     [x: string]: any;
-     $options: Options
-     $data?: Object
-     $methods?: Object
-     $computed?: Object
-     $watch?: Object
-     $compile: Object
-     $template?: string
+    $options: Options
+    $data?: Object
+    $methods?: Object
+    $computed?: Object
+    $watch?: Object
+    $compile: Object
+    $template?: string
 
     constructor(options: Options) {
         this.$options = options
@@ -25,20 +25,21 @@ class MVVM implements mvvm {
     }
     /**
  * @todo 初始化
- * @return {null}
+
 */
     init(): void {
         // 数据代理
         this.proxyData()
         // 处理计算属性
         this.initComputed()
+        // 添加观察者
+        this.$data && new Observer(this.$data, this)
         // 渲染页面
         this.$compile = new Compile(this.$options.el, this)
     }
     /**
      * @todo 实现数据代理，将this.$data中的数据代理到this上
      * @param {string} key 传入的键
-     * @return {null}
     */
     proxyData(): void {
         let self = this;
@@ -61,7 +62,7 @@ class MVVM implements mvvm {
     }
     /**
   * @todo 处理计算属性
-  * @return {null}
+ 
  */
     initComputed(): void {
         let self = this;

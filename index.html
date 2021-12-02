@@ -5,12 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>mine-mvvm</title>
+    <style type="text/css">
+        .one{
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
         <h1 @click="test" >mine-mvvm
-            <span v-bind:data='html'></span>
+            <span :class='class'>1111</span>
         </h1>
+        <button :disabled="boolean">52345234</button>
+        bu
         {{person.sex}}
     </div>
 </body>

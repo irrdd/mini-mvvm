@@ -6,7 +6,7 @@ const devConfig =  {
     devtool:'eval-cheap-module-source-map',
     devServer: {
         static: './dist',
-        open:true,
+        open:false,
         compress: true, //压缩
         allowedHosts: 'all', //允许所有ip地址请求
     },
