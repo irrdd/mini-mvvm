@@ -41,14 +41,9 @@ class CompileUtil {
     html(node: Element, vm: mvvm, express: string): void {
         this.bind(node, vm, express, 'html');
     }
+
     /**
-* @todo 获取mvvm中data的属性值
-* @param {mvvm} vm 
-* @param {string} express 
-* @return {null}
-*/
-    /**
-* @todo 处理事件绑定
+* @todo 处理事件指令
 * @param {Element} node 
 * @param {mvvm} vm 
 * @param {string} express 
@@ -62,6 +57,38 @@ class CompileUtil {
             node.addEventListener(eventType, fn)
         }
     }
+    /**
+* @todo 处理语法糖的事件指令
+* @param {Element} node 
+* @param {mvvm} vm 
+* @param {string} express 
+* @param {dir} express 
+* @return {null}
+*/
+    eventHandlerSugar(node: Element, vm: mvvm, express: string, dir: string): void {
+        let fn = vm.$methods && vm.$methods[express]
+        if (dir && fn) {
+            node.addEventListener(dir, fn)
+        }
+    }
+    /**
+* @todo 处理语法糖的普通指令
+* @param {Element} node 
+* @param {mvvm} vm 
+* @param {string} express 
+* @param {dir} express 
+* @return {null}
+*/
+    bindHandlerSugar(node: Element, vm: mvvm, express: string, dir: string): void {
+        console.log('处理普通指令的语法糖');
+        
+    }
+    /**
+* @todo 获取mvvm中data的属性值
+* @param {mvvm} vm 
+* @param {string} express 
+* @return {null}
+*/
     getVMVal(vm: mvvm, express: string): unknown {
         let val: unknown = vm
         let expressLIst: string[] = express.split('.')

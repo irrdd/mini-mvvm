@@ -64,9 +64,22 @@ class Compile {
                 } else {
                     compileUtil[dir] && compileUtil[dir](node, vm, express)
                 }
-
-
             }
+            // 判断是否是语法糖
+            if (verdictUtil.isSugar(attrName)) {
+                let express = attr.value
+                let regex = /^(@|:)(.+)$/
+                regex.test(attrName)
+                let dir = RegExp.$2.trim()
+                if (verdictUtil.isEventSugar(attrName)) {
+                    compileUtil.eventHandlerSugar(node, vm, express, dir)
+                } else if(verdictUtil.isBindSugar(attrName)) {
+                    compileUtil.bindHandlerSugar(node, vm, express, dir)
+
+
+                }
+            }
+            node.removeAttribute(attrName)
         })
     }
     /**

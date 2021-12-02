@@ -29,13 +29,40 @@ class VerdictUtil {
     }
     /**
 * @todo 判断是否是v-开头的描述符
+* @param {string} dir 
+* @return {boolean}
+*/
+    isEventDirective(dir: string): boolean {
+        let regex = /^on.+$/
+        return regex.test(dir)
+    }
+    /**
+* @todo 判断是否是有@和：的语法糖
 * @param {string} attrName 
 * @return {boolean}
 */
-    isEventDirective(attrName: string): boolean {
-        let regex = /^on.+$/
+    isSugar(attrName: string): boolean {
+        let regex = /^(@|:).+$/
         return regex.test(attrName)
     }
+    /**
+* @todo 判断是否是事件指令的语法糖
+* @param {string} attrName 
+* @return {boolean}
+*/
+    isEventSugar(dir: string): boolean {
+        let regex = /^@|.+$/
+        return regex.test(dir)
+    }
+        /**
+* @todo 判断是否是普通指令的语法糖
+* @param {string} attrName 
+* @return {boolean}
+*/
+isBindSugar(dir: string): boolean {
+    let regex = /^:|.+$/
+    return regex.test(dir)
+}
 }
 
 

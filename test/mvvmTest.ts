@@ -32,6 +32,10 @@ let options: Options = {
         test() {
             console.log('事件绑定');
 
+        },
+        hover(){
+            console.log('鼠标移动');
+
         }
     }
 }

@@ -8,8 +8,8 @@
 </head>
 <body>
     <div id="app">
-        <h1 v-on:click="test">mine-mvvm
-            <span v-text='html'></span>
+        <h1 @click="test" >mine-mvvm
+            <span v-html='html'></span>
         </h1>
         {{person.sex}}
     </div>
