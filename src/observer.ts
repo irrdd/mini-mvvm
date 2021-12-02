@@ -47,7 +47,9 @@ class Observer {
             configurable: false,
             get: function () {
                 console.log('得到data中数据', key, value);
-
+                if (dependency.target) {
+                    dependency.depend()
+                }
                 return value
             },
             set: function (newValue: unknown) {

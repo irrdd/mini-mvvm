@@ -6,6 +6,7 @@ class Watcher {
     expOrFn: string | Function
     getter: Function
     value: unknown
+    depIDs:Object
     dependency: Dependency
     constructor(vm: MVVM, expOrFn: (string | Function), callback: Function) {
         this.callback = callback;
@@ -30,6 +31,13 @@ class Watcher {
                 obj = obj[element];
             })
             return obj;
+        }
+    }
+    addDep(dependency:Dependency){
+        if (!this.depIDs.hasOwnProperty(dependency.id)) {
+            dependency.addSub(this)
+            this.depIDs[dependency.id] = dependency
+            
         }
     }
 

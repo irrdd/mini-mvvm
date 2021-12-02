@@ -7,6 +7,11 @@ class Dependency {
     constructor() {
         this.id = id++
     }
-
+    depend(){
+        this.target.addDep(this)
+    }
+    addSub(sub: Watcher): void {
+        this.subs.push(sub)
+    }
 }
 export default Dependency
