@@ -1,6 +1,6 @@
 import VerdictUtil from './utils/verdictUtil'
 import UpdaterUtil from './utils/updaterUtil'
-import { mvvm, compile } from './Interfaces/objectType';
+import { mvvm, compile } from '../type/objectType';
 import CompileUtil from './utils/compileUtil'
 let verdictUtil = new VerdictUtil
 let updaterUtil = new UpdaterUtil

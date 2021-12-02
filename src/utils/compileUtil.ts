@@ -1,4 +1,4 @@
-import { mvvm } from '../Interfaces/objectType';
+import { mvvm } from '../../type/objectType';
 import UpdaterUtil from './updaterUtil'
 import VerdictUtil from './verdictUtil'
 import Watcher from '../watcher'

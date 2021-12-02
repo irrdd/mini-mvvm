@@ -1,5 +1,5 @@
 import MVVM from "../src";
-import { Options } from '../src/Interfaces/dataType';
+import { Options } from '../type/dataType';
 
 let options: Options = {
     el: '#app',

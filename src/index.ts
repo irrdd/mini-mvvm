@@ -1,8 +1,8 @@
-import { Options } from './Interfaces/dataType';
+import { Options } from '../type/dataType';
 import Compile from './compile';
 import Observer from './observer';
 import Watcher from './watcher';
-import { mvvm } from './Interfaces/objectType';
+import { mvvm } from '../type/objectType';
 
 class MVVM implements mvvm {
     [x: string]: any;

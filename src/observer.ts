@@ -1,4 +1,4 @@
-import { mvvm } from './Interfaces/objectType';
+import { mvvm } from '../type/objectType';
 import Dependency from './dependency';
 /**
 * @todo 为数据添加观察者

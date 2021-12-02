@@ -1,4 +1,4 @@
-import { mvvm } from './Interfaces/objectType';
+import { mvvm } from '../type/objectType';
 class Watch{
     callback:Function
     vm:mvvm
@@ -13,7 +13,7 @@ class Watch{
     parseGetter(express:string){
 
         return (obj)=>{
-            
+
         }
     }
 }
