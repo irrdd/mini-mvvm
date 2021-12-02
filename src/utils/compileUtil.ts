@@ -73,7 +73,6 @@ class CompileUtil {
         } else {
             this.eventBindHandler(node, vm, express, eventType)
         }
-
     }
     /**
 * @todo 处理v-on的事件指令
@@ -98,13 +97,13 @@ class CompileUtil {
 * @return {null}
 */
     eventBindHandler(node: Element, vm: mvvm, express: string, dir: string): void {
-        console.log('处理v-bind');
+        node.setAttribute(dir,this.getVMVal(vm,express) as string)
     }
     /**
 * @todo 获取mvvm中data的属性值
 * @param {mvvm} vm 
 * @param {string} express 
-* @return {null}
+* @return {unknown}
 */
     getVMVal(vm: mvvm, express: string): unknown {
         let val: unknown = vm
