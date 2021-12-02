@@ -5,13 +5,13 @@ import Watcher from './watcher';
 
 class MVVM  {
     [x: string]: any;
-    $options: Options
-    $data?: Object
-    $methods?: Object
-    $computed?: Object
-    $watch?: Object
-    $compile: Object
-    $template?: string
+   private $options: Options
+   private $data?: Object
+   private $methods?: Object
+   private $computed?: Object
+   private $watch?: Object
+   private $compile: Object
+   private $template?: string
 
     constructor(options: Options) {
         this.$options = options
@@ -92,6 +92,9 @@ class MVVM  {
     }
     get options() {
         return this.$options
+    }
+    get template() {
+        return this.$template
     }
 
 

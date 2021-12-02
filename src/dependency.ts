@@ -1,10 +1,11 @@
-import Watch from "./watcher";
+import Watcher from "./watcher";
+let id = 0
 class Dependency {
     id: number;
-    subs: Watch[]
-    target: Watch | null;
-    constructor(id: number) {
-        this.id = id
+    subs: Watcher[]
+    target: Watcher | null;
+    constructor() {
+        this.id = id++
     }
 
 }

@@ -5,4 +5,4 @@ interface Options {
     computed?: Object,
     watch?: Object
 }
-export { Options, }
+export { Options}

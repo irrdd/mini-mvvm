@@ -38,7 +38,7 @@ class Observer {
 * @param {Object} data 传入的data
 */
     difineReactive(data: Object, key: string, value: unknown): void {
-        let dependency = new Dependency(this.id++)
+        let dependency = new Dependency()
         console.log('观察者', key, value,dependency.id);
         this.walk(value)
 
