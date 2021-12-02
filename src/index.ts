@@ -2,9 +2,8 @@ import { Options } from '../type/dataType';
 import Compile from './compile';
 import Observer from './observer';
 import Watcher from './watcher';
-import { mvvm } from '../type/objectType';
 
-class MVVM implements mvvm {
+class MVVM  {
     [x: string]: any;
     $options: Options
     $data?: Object

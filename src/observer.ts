@@ -1,16 +1,16 @@
-import { mvvm } from '../type/objectType';
+import MVVM from './index'
 import Dependency from './dependency';
 /**
 * @todo 为数据添加观察者
-* @param { Object } data  mvvm中的data
-* @param {mvvm} vm mvvm实例
+* @param { Object } data  MVVM中的data
+* @param {MVVM} vm MVVM实例
 */
 class Observer {
     data: Object;
-    vm: mvvm
+    vm: MVVM
     id:number = 0
 
-    constructor(data: Object, vm: mvvm) {
+    constructor(data: Object, vm: MVVM) {
         this.data = data;
         this.vm = vm;
         this.init();

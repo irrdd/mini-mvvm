@@ -1,6 +1,6 @@
 import VerdictUtil from './utils/verdictUtil'
 import UpdaterUtil from './utils/updaterUtil'
-import { mvvm, compile } from '../type/objectType';
+import MVVM from './index'
 import CompileUtil from './utils/compileUtil'
 let verdictUtil = new VerdictUtil
 let updaterUtil = new UpdaterUtil
@@ -8,14 +8,14 @@ let compileUtil = new CompileUtil
 /**
 * @todo 渲染模板类
 * @param { string } el 
-* @param {mvvm} vm mvvm实例
+* @param {MVVM} vm MVVM实例
 
 */
-class Compile implements compile {
-    $vm: mvvm
+class Compile {
+    $vm: MVVM
     $element: Element
     $fragment: DocumentFragment
-    constructor(el: string, vm: mvvm) {
+    constructor(el: string, vm: MVVM) {
         this.$vm = vm;
         this.$element = document.querySelector(el)
         if (this.$element) {
@@ -53,10 +53,10 @@ class Compile implements compile {
     /**
 * @todo 渲染元素节点
 * @param {Element} node 元素节点
-* @param {mvvm} vm mvvm实例
+* @param {MVVM} vm MVVM实例
 * @return {null}
 */
-    compile(node: Element, vm: mvvm): void {
+    compile(node: Element, vm: MVVM): void {
         let nodeAttrs = node.attributes
         Array.from(nodeAttrs).forEach((attr) => {
             let attrName = attr.name
