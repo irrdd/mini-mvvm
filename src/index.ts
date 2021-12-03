@@ -1,7 +1,6 @@
 import { Options } from '../type/dataType';
 import Compile from './compile';
 import Observer from './observer';
-import Watcher from './watcher';
 
 class MVVM  {
     [x: string]: any;

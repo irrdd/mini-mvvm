@@ -1,10 +1,7 @@
 import MVVM from '../index'
-
 import UpdaterUtil from './updaterUtil'
-import VerdictUtil from './verdictUtil'
 import Watcher from '../watcher'
 let updaterUtil = new UpdaterUtil
-let verdictUtil = new VerdictUtil
 
 /**
  * @todo 页面渲染所需的工具函数
@@ -21,7 +18,7 @@ class CompileUtil {
     bind(node: Element, vm: MVVM, express: string, dir: string): void {
         let updateFn = updaterUtil[dir + 'Updater']
         updateFn && updateFn(node, this.getVMVal(vm, express))
-        new Watcher(vm, express,(value,oldValue) => {
+        new Watcher(vm, express, (value, oldValue) => {
             updateFn && updateFn(node, value, oldValue)
         })
     }
@@ -72,7 +69,11 @@ class CompileUtil {
 * @param {string} dir 元素处理后属性
 * @return {null}
 */
-    eventHandlerSugar(node: Element, vm: MVVM, express: string, eventType: string, eventName: string): void {
+    eventHandlerSugar(node: Element, vm: MVVM, express: string, attrName: string): void {
+        let regex = /^(@|:)(.+)$/
+        regex.test(attrName)
+        let eventType = RegExp.$2.trim()
+        let eventName = RegExp.$1.trim()
         if (eventName === '@') {
             this.eventOnHandler(node, vm, express, eventType)
         } else {
@@ -90,7 +91,7 @@ class CompileUtil {
     eventOnHandler(node: Element, vm: MVVM, express: string, dir: string): void {
         let fn = vm.methods && vm.methods[express]
         if (dir && fn) {
-            node.addEventListener(dir, fn.bind(vm),false);
+            node.addEventListener(dir, fn.bind(vm), false);
         }
     }
     /**
@@ -102,7 +103,11 @@ class CompileUtil {
 * @return {null}
 */
     eventBindHandler(node: Element, vm: MVVM, express: string, dir: string): void {
-        node.setAttribute(dir,this.getVMVal(vm,express) as string)
+        node.setAttribute(dir, this.getVMVal(vm, express) as string)
+        let self = this;
+        new Watcher(vm, express, (value, oldValue) => {
+            node.setAttribute(dir, value)
+        })
     }
     /**
 * @todo 获取MVVM中data的属性值

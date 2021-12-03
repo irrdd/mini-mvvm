@@ -34,11 +34,13 @@ let options: Options = {
         test() {
             console.log('事件绑定');
             this.name = '加入观察者后'
+            this.class = 'two'
 
         },
         hover(){
             console.log('鼠标移动');
             this.name = '测试'
+            this.class = 'one'
 
         }
     }

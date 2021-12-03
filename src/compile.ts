@@ -1,9 +1,7 @@
 import VerdictUtil from './utils/verdictUtil'
-import UpdaterUtil from './utils/updaterUtil'
 import MVVM from './index'
 import CompileUtil from './utils/compileUtil'
 let verdictUtil = new VerdictUtil
-let updaterUtil = new UpdaterUtil
 let compileUtil = new CompileUtil
 /**
 * @todo 渲染模板类
@@ -60,8 +58,8 @@ class Compile {
         let nodeAttrs = node.attributes
         Array.from(nodeAttrs).forEach((attr) => {
             let attrName = attr.name
+            let express = attr.value
             if (verdictUtil.isDirective(attrName)) {
-                let express = attr.value
                 let regex = /^v-(.+)$/
                 regex.test(attrName)
                 let dir = RegExp.$1.trim()
@@ -73,12 +71,7 @@ class Compile {
             }
             // 判断是否是语法糖
             if (verdictUtil.isSugar(attrName)) {
-                let express = attr.value
-                let regex = /^(@|:)(.+)$/
-                regex.test(attrName)
-                let eventType = RegExp.$2.trim()
-                let eventName = RegExp.$1.trim()
-                compileUtil.eventHandlerSugar(node, vm, express, eventType, eventName)
+                compileUtil.eventHandlerSugar(node, vm, express, attrName)
             }
             node.removeAttribute(attrName)
         })
