@@ -90,7 +90,7 @@ class CompileUtil {
     eventOnHandler(node: Element, vm: MVVM, express: string, dir: string): void {
         let fn = vm.methods && vm.methods[express]
         if (dir && fn) {
-            node.addEventListener(dir, fn)
+            node.addEventListener(dir, fn.bind(vm),false);
         }
     }
     /**

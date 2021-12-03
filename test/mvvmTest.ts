@@ -33,6 +33,7 @@ let options: Options = {
     methods: {
         test() {
             console.log('事件绑定');
+            this.person.sex = '加入观察者后'
 
         },
         hover(){
@@ -42,7 +43,6 @@ let options: Options = {
     }
 }
 let mvvm = new MVVM(options);
-mvvm.person.sex = '加入观察者后'
 console.log(mvvm.one);
 // console.log(mvvm);
 
