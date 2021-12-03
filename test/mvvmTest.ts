@@ -42,7 +42,7 @@ let options: Options = {
     }
 }
 let mvvm = new MVVM(options);
-mvvm.name = '加入观察者后'
+mvvm.person.sex = '加入观察者后'
 console.log(mvvm.one);
 // console.log(mvvm);
 

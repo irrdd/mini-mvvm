@@ -8,7 +8,7 @@ import Dependency from './dependency';
 class Observer {
     data: Object;
     vm: MVVM
-    id:number = 0
+    id: number = 0
 
     constructor(data: Object, vm: MVVM) {
         this.data = data;
@@ -39,26 +39,25 @@ class Observer {
 */
     difineReactive(data: Object, key: string, value: unknown): void {
         let dependency = new Dependency()
-        console.log('观察者', key, value,dependency.id);
+        console.log('观察者', key, value, dependency.id);
         this.walk(value)
-
+        let self = this
         Object.defineProperty(data, key, {
             enumerable: true,
             configurable: false,
             get: function () {
                 console.log('得到data中数据', key, value);
-                if (dependency.target) {
-                    dependency.depend()
-                }
+                dependency.target && dependency.depend()
                 return value
             },
             set: function (newValue: unknown) {
                 console.log('设置data中数据', newValue);
-
-                if (value === newValue) {
-                    return
-                }
+                if (value === newValue) return
                 value = newValue
+                self.walk(newValue)
+                dependency.notify()
+
+
             }
         })
 
