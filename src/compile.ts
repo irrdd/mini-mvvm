@@ -9,9 +9,9 @@ let compileUtil = new CompileUtil
 * @param {MVVM} vm MVVM实例
 */
 class Compile {
-    $vm: MVVM
-    $element: Element
-    $fragment: DocumentFragment
+    private  $vm: MVVM
+    private  $element: Element
+    private  $fragment: DocumentFragment
     constructor(el: string, vm: MVVM) {
         this.$vm = vm;
         this.$element = document.querySelector(el)
