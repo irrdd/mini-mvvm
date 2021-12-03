@@ -60,7 +60,6 @@ class MVVM  {
     }
     /**
   * @todo 处理计算属性
- 
  */
     initComputed(): void {
         let self = this;

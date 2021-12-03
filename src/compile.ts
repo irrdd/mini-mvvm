@@ -7,7 +7,6 @@ let compileUtil = new CompileUtil
 * @todo 渲染模板类
 * @param { string } el 
 * @param {MVVM} vm MVVM实例
-
 */
 class Compile {
     $vm: MVVM
@@ -52,7 +51,6 @@ class Compile {
 * @todo 渲染元素节点
 * @param {Element} node 元素节点
 * @param {MVVM} vm MVVM实例
-* @return {null}
 */
     compile(node: Element, vm: MVVM): void {
         let nodeAttrs = node.attributes

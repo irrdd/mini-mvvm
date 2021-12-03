@@ -13,7 +13,6 @@ class CompileUtil {
 * @param {MVVM} vm 
 * @param {string} express 
 * @param {string} dir 
-* @return {null}
 */
     bind(node: Element, vm: MVVM, express: string, dir: string): void {
         let updateFn = updaterUtil[dir + 'Updater']
@@ -28,7 +27,6 @@ class CompileUtil {
 * @param {Element} node 
 * @param {MVVM} vm 
 * @param {string} express 
-* @return {null}
 */
     text(node: Element, vm: MVVM, express: string): void {
         this.bind(node, vm, express, 'text');
@@ -38,7 +36,6 @@ class CompileUtil {
 * @param {Element} node 
 * @param {MVVM} vm 
 * @param {string} express 
-* @return {null}
 */
     html(node: Element, vm: MVVM, express: string): void {
         this.bind(node, vm, express, 'html');
@@ -48,7 +45,6 @@ class CompileUtil {
 * @param {Element} node 
 * @param {MVVM} vm 
 * @param {string} express 
-* @return {null}
 */
     model(node: Element, vm: MVVM, express: string): void {
         this.bind(node, vm, express, 'model');
@@ -71,7 +67,6 @@ class CompileUtil {
 * @param {MVVM} vm 
 * @param {string} express 
 * @param {string} dir 元素处理后属性
-* @return {null}
 */
     eventHandler(node: Element, vm: MVVM, express: string, dir: string): void {
         let eventName = dir.split(':')[0];
@@ -88,7 +83,6 @@ class CompileUtil {
 * @param {MVVM} vm 
 * @param {string} express 
 * @param {string} dir 元素处理后属性
-* @return {null}
 */
     eventHandlerSugar(node: Element, vm: MVVM, express: string, attrName: string): void {
         let regex = /^(@|:)(.+)$/
@@ -107,7 +101,6 @@ class CompileUtil {
 * @param {MVVM} vm 
 * @param {string} express 
 * @param {string} dir  
-* @return {null}
 */
     eventOnHandler(node: Element, vm: MVVM, express: string, dir: string): void {
         let fn = vm.methods && vm.methods[express]
@@ -121,7 +114,6 @@ class CompileUtil {
 * @param {MVVM} vm 
 * @param {string} express 
 * @param {string} dir 
-* @return {null}
 */
     eventBindHandler(node: Element, vm: MVVM, express: string, dir: string): void {
         node.setAttribute(dir, this.getVMVal(vm, express) as string)
@@ -148,7 +140,6 @@ class CompileUtil {
 * @todo 设置MVVM中data的属性值
 * @param {MVVM} vm 
 * @param {string} express 
-* @return {unknown}
 */
     setVMVal(vm: MVVM, express: string, newValue: unknown): void {
         let value: unknown = vm
