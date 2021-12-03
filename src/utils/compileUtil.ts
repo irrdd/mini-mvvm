@@ -43,6 +43,27 @@ class CompileUtil {
     html(node: Element, vm: MVVM, express: string): void {
         this.bind(node, vm, express, 'html');
     }
+    /**
+* @todo 处理v-model指令
+* @param {Element} node 
+* @param {MVVM} vm 
+* @param {string} express 
+* @return {null}
+*/
+    model(node: Element, vm: MVVM, express: string): void {
+        this.bind(node, vm, express, 'model');
+        let self = this
+        let value = this.getVMVal(vm, express)
+        node.addEventListener('input', (event) => {
+            let newValue = event.target['value']
+            if (value === newValue) {
+                return
+
+            }
+            self.setVMVal(vm, express, newValue)
+            value = newValue
+        })
+    }
 
     /**
 * @todo 处理事件指令
@@ -116,12 +137,29 @@ class CompileUtil {
 * @return {unknown}
 */
     getVMVal(vm: MVVM, express: string): unknown {
-        let val: unknown = vm
+        let value: unknown = vm
         let expressList: string[] = express.split('.')
         expressList.forEach((key: string) => {
-            val = val[key]
+            value = value[key]
         })
-        return val
+        return value
+    }
+    /**
+* @todo 设置MVVM中data的属性值
+* @param {MVVM} vm 
+* @param {string} express 
+* @return {unknown}
+*/
+    setVMVal(vm: MVVM, express: string, newValue: unknown): void {
+        let value: unknown = vm
+        let expressList: string[] = express.split('.')
+        expressList.forEach((key: string, index: number) => {
+            if (index < expressList.length - 1) {
+                value = value[key]
+            } else {
+                value[key] = newValue
+            }
+        })
     }
 }
 export default CompileUtil
