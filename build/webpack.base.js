@@ -7,7 +7,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: isProductionMode ? './' : '/', //热更新启动需要命中文件夹，否则用打包完成的文件，所有pubulicPath不能是'./'
-    filename: 'js/[name].[hash].js',
+    filename: 'js/mvvm.js',
     chunkFilename: 'js/[name].[hash].chunk.js',
     // environment: {
     //   arrowFunction:false
