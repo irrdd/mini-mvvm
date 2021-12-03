@@ -33,11 +33,12 @@ let options: Options = {
     methods: {
         test() {
             console.log('事件绑定');
-            this.person.sex = '加入观察者后'
+            this.name = '加入观察者后'
 
         },
         hover(){
             console.log('鼠标移动');
+            this.name = '测试'
 
         }
     }
