@@ -6,3 +6,4 @@
 *.fatbin
 node_modules
 dist
+.idea
