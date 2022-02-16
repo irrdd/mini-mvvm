@@ -17,7 +17,7 @@ class CompileUtil {
     bind(node: Element, vm: MVVM, express: string, dir: string): void {
         let updateFn = updaterUtil[dir + 'Updater']
         updateFn && updateFn(node, this.getVMVal(vm, express))
-        new Watcher(vm, express, (value, oldValue) => {
+        new Watcher(vm, express, (value:unknown, oldValue:unknown) => {
             updateFn && updateFn(node, value, oldValue)
         })
     }
@@ -50,6 +50,7 @@ class CompileUtil {
         this.bind(node, vm, express, 'model');
         let self = this
         let value = this.getVMVal(vm, express)
+        //TODO 只能双向绑定input，要支持select等双向数据绑定
         node.addEventListener('input', (event) => {
             let newValue = event.target['value']
             if (value === newValue) {

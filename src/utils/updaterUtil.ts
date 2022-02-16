@@ -8,6 +8,7 @@ class UpdaterUtil {
 * @param {string} value  
 */
     textUpdater(node: Element, value: string): void {
+    // todo 模板数组取值 
         node.textContent = typeof value === 'undefined' ? '' : value;
     }
     /**

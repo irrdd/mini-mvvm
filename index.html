@@ -19,11 +19,13 @@
         <h1 @click="test" >mine-mvvm
             <span :class='class'>1111</span>
         </h1>
-        <input v-model='name' type="text"></input>
+        <input v-model='name' type="text" title="inp1"></input>
         <button @click='test'>改变值</button>
         <button @click='hover'>还原值</button>
         {{name}}
         <p>{{class}}</p>
+        数组<p>{{array}}</p>
+        数组<p>{{array[0]}}</p>
     </div>
 </body>
 </html>

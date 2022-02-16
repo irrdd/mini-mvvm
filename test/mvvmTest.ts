@@ -12,7 +12,10 @@ let options: Options = {
         },
         html: '<span>John</span>',
         class:'one',
-        boolean: true
+        boolean: true,
+        array:[7,13,26,1,2,3,4,{
+            a:1
+        }]
 
     },
     computed: {
@@ -35,6 +38,17 @@ let options: Options = {
             console.log('事件绑定');
             this.name = '加入观察者后'
             this.class = 'two'
+            // this.array.push(14)
+            // this.array[2] = 16
+            // this.array.pop()
+            // this.array.shift()
+            // this.array.splice(1,2,5,7)
+            // this.array.sort((a,b)=>{
+            //     return a-b
+            // })
+            this.array[this.array.length - 1].a = 3
+            console.log(this.array);
+            
 
         },
         hover(){

@@ -5,4 +5,9 @@ interface Options {
     computed?: Object,
     watch?: Object
 }
-export { Options}
+interface ObserverData extends Object {
+    [x: string]: any;
+    __proto__:any
+
+}
+export { Options,ObserverData}

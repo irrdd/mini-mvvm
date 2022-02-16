@@ -1,5 +1,7 @@
 import MVVM from './index'
 import Dependency from './dependency';
+import arrayPrototype from './utils/resetArrayMethod'
+import {ObserverData} from '../type/dataType'
 /**
 * @todo 为数据添加观察者
 * @param { Object } data  MVVM中的data
@@ -23,13 +25,21 @@ class Observer {
  * @todo 遍历data中数据，添加观察者
  * @param {Object} data 传入的data
 */
-    walk(data: unknown): void {
+    walk(data: ObserverData | unknown  ): void {
         if (typeof data !== 'object') {
             return;
         }
-        Object.keys(data).forEach((key: string) => {
-            this.difineReactive(data, key, data[key]);
-        })
+        if (Array.isArray(data)) {
+            (data as unknown as ObserverData).__proto__ = arrayPrototype
+            data.forEach(element=>{
+                this.walk(element)
+            })
+        } else {
+            Object.keys(data).forEach((key: string) => {
+                this.difineReactive(data, key, data[key]);
+            })
+        }
+
     }
     /**
 * @todo 对传入的数据添加观察者
@@ -50,7 +60,7 @@ class Observer {
             },
             set: function (newValue: unknown) {
                 // console.log('设置data中数据', newValue);
-                if (value === newValue) return
+                if (value === newValue) return                
                 value = newValue
                 self.walk(newValue)
                 dependency.notify()
