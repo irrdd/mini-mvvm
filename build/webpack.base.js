@@ -3,15 +3,15 @@ const htmlWebpackPlugin = require('html-webpack-plugin')
 const isProductionMode = process.env.NODE_ENV === 'production';
 console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 module.exports = {
-  entry: './test/mvvmTest.ts',
+  entry: './src/index.ts',
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: isProductionMode ? './' : '/', //热更新启动需要命中文件夹，否则用打包完成的文件，所有pubulicPath不能是'./'
-    filename: 'js/mvvm.js',
+    filename: 'mvvm.js',
     chunkFilename: 'js/[name].[hash].chunk.js',
-    // environment: {
-    //   arrowFunction:false
-    // }
+    environment: {
+      arrowFunction:false
+    }
   },
   module: {
     rules: [

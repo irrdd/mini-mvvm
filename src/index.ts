@@ -98,6 +98,6 @@ class MVVM  {
 
 }
 
-
+(window as any).MVVM = MVVM
 export default MVVM
 
