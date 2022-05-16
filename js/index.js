@@ -2,6 +2,7 @@ import Compile from './compile';
 import Observer from './observer';
 class MVVM {
     constructor(options) {
+        console.log(options);
         this.$options = options;
         this.$data = options.data;
         this.$methods = options.methods;

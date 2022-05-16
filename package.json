@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.dev.js",
+    "jsdev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.jsdev.js",
     "build": "cross-env NODE_ENV=production  webpack  --config ./build/webpack.prod.js",
     "tojs": "tsc ./src/index.ts -t es6 --outDir ./js"
   },
